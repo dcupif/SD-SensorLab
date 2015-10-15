@@ -4,6 +4,7 @@
  */
 package eu.telecomnancy;
 
+import java.rmi.RemoteException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,7 +42,9 @@ public class Client {
                 }
             } catch (SensorNotActivated ex) {
                 Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } catch (RemoteException e) {
+				e.printStackTrace();
+			}
         }
     }
     

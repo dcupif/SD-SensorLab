@@ -8,6 +8,7 @@ package eu.telecomnancy;
  *
  * @author charoy
  */
+@SuppressWarnings("serial")
 public class SensorNotActivated extends Exception {
 
     public SensorNotActivated(String message) {

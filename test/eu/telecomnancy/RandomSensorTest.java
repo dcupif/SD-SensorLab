@@ -4,12 +4,10 @@
  */
 package eu.telecomnancy;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+
+import java.rmi.RemoteException;
 
 /**
  *
@@ -33,8 +31,9 @@ public class RandomSensorTest {
         System.out.println("getValueFail");
         RandomSensor instance = new RandomSensor();
         try {
-            double result = instance.getValue();
+            //double result = instance.getValue();
             fail("Should have throw an exception. The sensor is off");
+            instance.getValue();
         } catch (SensorNotActivated s) {
             assertTrue(!instance.getStatus());
         }
@@ -47,11 +46,16 @@ public class RandomSensorTest {
     public void testOnOff() {
         System.out.println("onOff");
         RandomSensor instance = new RandomSensor();
-        assertFalse(instance.getStatus());
-        instance.onOff();
-        assertTrue(instance.getStatus());
-        instance.onOff();
-        assertFalse(instance.getStatus());
+        try {
+			assertFalse(instance.getStatus());
+	        instance.onOff();
+	        assertTrue(instance.getStatus());
+	        instance.onOff();
+	        assertFalse(instance.getStatus());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 
