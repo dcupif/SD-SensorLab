@@ -4,6 +4,7 @@
  */
 package eu.telecomnancy;
 
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -11,7 +12,7 @@ import java.util.Random;
  *
  * @author charoy
  */
-public class RandomListenSensor implements ISensor {
+public class RandomListenSensor implements ISensorListener {
 
     private boolean status = false; //false = off - true = on
     double start = 50;
@@ -29,8 +30,9 @@ public class RandomListenSensor implements ISensor {
     }
 
     @Override
-    public void onOff() {
+    public void onOff(Client c) {
         status = !status;
+        notifyListeners(c);
     }
 
     @Override
@@ -46,9 +48,11 @@ public class RandomListenSensor implements ISensor {
         listeners.remove(s);
     }
     
-    public void notifyListeners() {
+    public void notifyListeners(Client c) {
         for (SensorListener sensorListener : listeners) {
-            sensorListener.statusChanged();
+        	if (sensorListener != c) {
+                sensorListener.statusChanged();        		
+        	}
         }
     }
 }

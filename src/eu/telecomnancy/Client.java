@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author charoy
  */
-public class Client {
+public class Client implements SensorListener {
     ISensor sense;
     Scanner c=new Scanner(System.in);
     public Client(ISensor sensor) {
@@ -27,7 +27,7 @@ public class Client {
                 rep= c.nextLine();
                 switch (rep) {
                     case "o": {
-                        sense.onOff();
+                        sense.onOff(this);
                         break;
                     }
                     case "s": {
@@ -47,6 +47,11 @@ public class Client {
 			}
         }
     }
+
+	@Override
+	public void statusChanged() {
+		System.out.println("Callback to Client");
+	}
     
 //   Code pour JDK 1.6
 //

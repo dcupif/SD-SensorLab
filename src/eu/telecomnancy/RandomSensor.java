@@ -25,7 +25,7 @@ public class RandomSensor implements ISensor {
     }
 
     @Override
-    public void onOff() throws RemoteException {
+    public void onOff(Client c) throws RemoteException {
         status=!status;
     }
 

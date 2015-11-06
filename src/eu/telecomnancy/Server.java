@@ -13,9 +13,9 @@ public class Server {
 		}
 		try {
 			String name = "sensor";
-			ISensor sensor = new RandomSensor();
-			ISensor stub = (ISensor) UnicastRemoteObject.exportObject(sensor, 0);
-			Registry registry = LocateRegistry.getRegistry();
+			ISensorListener sensor = new RandomListenSensor();
+			ISensorListener stub = (ISensorListener) UnicastRemoteObject.exportObject(sensor, 0);
+			Registry registry = LocateRegistry.createRegistry(1099);
 			registry.rebind(name, stub);
 			System.out.println("New registry binded for object "+name);
 		} catch (Exception e) {

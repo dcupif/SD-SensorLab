@@ -13,6 +13,6 @@ import java.rmi.RemoteException;
  */
 public interface ISensor extends Remote {
     public double getValue() throws SensorNotActivated, RemoteException;
-    public void onOff() throws RemoteException;
+    public void onOff(Client c) throws RemoteException;
     public boolean getStatus() throws RemoteException;
 }

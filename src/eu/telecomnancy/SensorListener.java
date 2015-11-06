@@ -4,10 +4,12 @@
  */
 package eu.telecomnancy;
 
+import java.rmi.Remote;
+
 /**
  *
  * @author charoy
  */
-public interface SensorListener {
+public interface SensorListener extends Remote {
     public void statusChanged();
 }

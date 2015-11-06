@@ -6,6 +6,7 @@ package eu.telecomnancy;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 
 /**
  *
@@ -25,8 +26,10 @@ public class Main {
         try {
         	String name = "sensor";
         	Registry registry = LocateRegistry.getRegistry();
-        	ISensor sensor = (ISensor) registry.lookup(name);
+        	ISensorListener sensor = (ISensorListener) registry.lookup(name);
         	Client c = new Client(sensor);
+        	Client stub = (Client) UnicastRemoteObject.exportObject(c,0);
+        	sensor.addListener(stub);
         	c.menu();
         } catch(Exception e) {
         	System.out.println("Sensor exception:");
